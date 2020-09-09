@@ -1,0 +1,27 @@
+<@formGroup labelFor="idForm" labelKey="#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label}" formStyle='horizontal' mandatory=true>
+	<@select name="idForm" items=form_list default_value=config.idForm?string />
+</@formGroup>
+<@formGroup labelFor='baseUrl' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_base_url}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_base_url_comment}' mandatory=true>
+	<@input type='text' size='sm' name='baseUrl' value=config.baseUrl maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='subscriberLogin' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_subscriber_login}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_subscriber_login_comment}' mandatory=true>
+	<@input type='text' size='sm' name='subscriberLogin' value=config.subscriberLogin maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='subscriberPassword' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_subscriber_pwd}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_subscriber_pwd_comment}' mandatory=true>
+	<@input type='text' size='sm' name='subscriberPassword' value=config.subscriberPassword maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='baseName' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_base_name}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_base_name_comment}' >
+	<@input type='text' size='sm' name='baseName' value=config.baseName maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='userLogin' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_login}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_login_comment}' >
+	<@input type='text' size='sm' name='userLogin' value=config.userLogin maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='userPassword' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_pwd}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_pwd_comment}' >
+	<@input type='text' size='sm' name='userPassword' value=config.userPassword maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='userLang' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_lang}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_user_lang_comment}' >
+	<@input type='text' size='sm' name='userLang' value=config.userLang maxlength=255 />
+</@formGroup>
+<@formGroup labelFor='productName' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_product_name}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_product_name_comment}' >
+	<@input type='text' size='sm' name='productName' value=config.productName maxlength=50 />
+</@formGroup>
