@@ -25,3 +25,9 @@
 <@formGroup labelFor='productName' labelKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_product_name}' helpKey='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.label_product_name_comment}' >
 	<@input type='text' size='sm' name='productName' value=config.productName maxlength=50 />
 </@formGroup>
+<@formGroup >
+	<@button type='submit' buttonIcon='check' name='apply' value='test_config' title='#i18n{module.workflow.eudonetforms.task.eudonetRest.config.button.test}'/>
+	<#if test_message??>
+		<@alert color='info' titleLevel='span' iconTitle='info' title=test_message />
+	</#if>
+</@formGroup>

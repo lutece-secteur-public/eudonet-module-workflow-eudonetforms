@@ -9,6 +9,10 @@
     <bean id="workflow-eudonetforms.eudonetRestTaskConfigService"
         class="fr.paris.lutece.plugins.workflowcore.service.config.TaskConfigService"
         p:taskConfigDAO-ref="workflow-eudonetforms.eudonetRestTaskConfigDao" />
+    <bean id="workflow-eudonetforms.eudonetRestService"
+        class="fr.paris.lutece.plugins.workflow.modules.eudonetforms.service.EudonetRestService" />
+     <bean id="workflow-eudonetforms.eudonetService"
+        class="fr.paris.lutece.plugins.workflow.modules.eudonetforms.service.EudonetService" />
 
     <!-- Dao -->
     <bean id="workflow-eudonetforms.eudonetRestTaskConfigDao"

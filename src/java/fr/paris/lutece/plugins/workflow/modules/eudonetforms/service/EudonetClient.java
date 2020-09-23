@@ -59,6 +59,7 @@ public class EudonetClient
         
         try {
             sendRequest( target, null, ResultDisconnect.class, HttpMethod.DELETE, headerMap );
+            _token = null;
             return true;
         }
         catch ( EudonetRestException e )
@@ -127,5 +128,10 @@ public class EudonetClient
             throw new EudonetRestException( response.getResultInfos( ).getErrorMessage( ) );
         }
         return response;
+    }
+    
+    public boolean hasToken( )
+    {
+        return _token != null;
     }
 }
