@@ -1,6 +1,8 @@
 package fr.paris.lutece.plugins.workflow.modules.eudonetforms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,6 +20,8 @@ import org.springframework.http.HttpMethod;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.EudonetRestTaskConfig;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.request.AuthenticateRequest;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.response.AbstractEudonetResponse;
+import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.response.MetaInfosListTabsResponse;
+import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.response.MetaTabLite;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.response.ResultAuth;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.business.rest.response.ResultDisconnect;
 import fr.paris.lutece.plugins.workflow.modules.eudonetforms.util.EudonetRestException;
@@ -28,10 +32,14 @@ import fr.paris.lutece.portal.service.util.AppLogService;
  */
 public class EudonetClient
 {
+    private static final String ERROR_EUDONET = "Error Eudonet: ";
+    
     // PATH
     private static final String PATH_AUTHENTICATE = "Authenticate";
     private static final String PATH_TOKEN = "Token";
     private static final String PATH_DISCONNECT = "Disconnect";
+    private static final String PATH_META_INFOS = "MetaInfos";
+    private static final String PATH_LIST_TABS = "ListTabs/";
     
     // HEADER
     private static final String HEADER_X_AUTH = "x-auth";
@@ -58,13 +66,13 @@ public class EudonetClient
         headerMap.put( HEADER_X_AUTH, _token );
         
         try {
-            sendRequest( target, null, ResultDisconnect.class, HttpMethod.DELETE, headerMap );
+            sendRequest( target, ResultDisconnect.class, HttpMethod.DELETE, headerMap );
             _token = null;
             return true;
         }
         catch ( EudonetRestException e )
         {
-            AppLogService.error( "Error Authentication Eudonet: " + e.getMessage( ) );
+            AppLogService.error( ERROR_EUDONET + e.getMessage( ) );
             return false; 
         }
     }
@@ -85,8 +93,13 @@ public class EudonetClient
         }
         catch ( EudonetRestException e )
         {
-            AppLogService.error( "Error Authentication Eudonet: " + e.getMessage( ) );
+            AppLogService.error( ERROR_EUDONET + e.getMessage( ) );
         }
+    }
+    
+    private <T extends AbstractEudonetResponse<?>> T sendRequest( WebTarget target, Class<T> reponseDataClass, HttpMethod method, Map<String, String> headerMap ) throws EudonetRestException
+    {
+        return sendRequest( target, null, reponseDataClass, method, headerMap );
     }
     
     private <T extends AbstractEudonetResponse<?>> T sendRequest( WebTarget target, Entity<?> jsonRequest, Class<T> reponseDataClass, HttpMethod method ) throws EudonetRestException
@@ -111,6 +124,9 @@ public class EudonetClient
                 case DELETE:
                     response = builder.delete( reponseDataClass );
                     break;
+                case GET:
+                    response = builder.get( reponseDataClass );
+                    break;
                 default:
                     break;
             }
@@ -133,5 +149,29 @@ public class EudonetClient
     public boolean hasToken( )
     {
         return _token != null;
+    }
+    
+    /**
+     * Rest call to get the list of eudonet tables.
+     * @param config
+     * @param token
+     * @return
+     */
+    public List<MetaTabLite> listEudonetTables( EudonetRestTaskConfig config )
+    {
+        WebTarget target = _client.target( config.getBaseUrl( ) ).path( PATH_META_INFOS ).path( PATH_LIST_TABS );
+        
+        Map<String, String> headerMap = new HashMap<>( );
+        headerMap.put( HEADER_X_AUTH, _token );
+        
+        try {
+            MetaInfosListTabsResponse response = sendRequest( target, MetaInfosListTabsResponse.class, HttpMethod.GET, headerMap );
+            return response.getResultData( ).getMetaTabLites( );
+        }
+        catch ( EudonetRestException e )
+        {
+            AppLogService.error( ERROR_EUDONET + e.getMessage( ) );
+            return new ArrayList<>( ); 
+        }
     }
 }

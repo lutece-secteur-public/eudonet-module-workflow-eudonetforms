@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AbstractEudonetResponse<D> implements Serializable
+public abstract class AbstractEudonetResponse<D> implements Serializable
 {
     private static final long serialVersionUID = -439852082689037533L;
 
     private ResultInfos _resultInfos;
-    private D _resultData;
+    protected D _resultData;
 
     /**
      * @return the resultInfos
@@ -41,9 +41,5 @@ public class AbstractEudonetResponse<D> implements Serializable
     /**
      * @param resultData the resultData to set
      */
-    @JsonProperty("ResultData")
-    public void setResultData( D resultData )
-    {
-        _resultData = resultData;
-    }
+    public abstract void setResultData( D resultData );
 }
