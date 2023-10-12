@@ -74,10 +74,12 @@
         <jiraProjectName>WFEUDOFO</jiraProjectName>
         <jiraComponentId>16253</jiraComponentId>
     </properties>
+
     <scm>
-        <connection>scm:git:https://github.com/lutece-platform/lutece-wf-module-workflow-eudonetforms.git</connection>
-        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-wf-module-workflow-eudonetforms.git</developerConnection>
-        <url>https://github.com/lutece-platform/lutece-wf-module-workflow-eudonetforms</url>
+        <connection>scm:git:https://github.com/lutece-secteur-public/eudonet-module-workflow-eudonetforms.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-secteur-public/eudonet-module-workflow-eudonetforms.git</developerConnection>
+        <url>https://github.com/lutece-secteur-public/eudonet-module-workflow-eudonetforms.git</url>
         <tag>HEAD</tag>
     </scm>
+
 </project>
